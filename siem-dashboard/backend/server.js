@@ -77,6 +77,6 @@ app.put('/users/:username', authenticateToken, (req, res) => {
   saveUsers(users);
   res.json({ message: 'Profile updated' });
 });
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`SIEM backend running on http://0.0.0.0:${PORT}`);
 }); 
