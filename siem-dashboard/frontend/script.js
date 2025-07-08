@@ -1,4 +1,4 @@
-// Utility: Get/Set JWT
+// Utility: Get/Set JWT and Profile
 function setToken(token) {
   localStorage.setItem('siem_jwt', token);
 }
@@ -7,6 +7,14 @@ function getToken() {
 }
 function clearToken() {
   localStorage.removeItem('siem_jwt');
+  localStorage.removeItem('siem_profile');
+}
+function setProfile(profile) {
+  localStorage.setItem('siem_profile', JSON.stringify(profile));
+}
+function getProfile() {
+  const p = localStorage.getItem('siem_profile');
+  return p ? JSON.parse(p) : null;
 }
 function authHeader() {
   const token = getToken();
@@ -33,6 +41,7 @@ if (document.getElementById('login-form')) {
       }
       const data = await res.json();
       setToken(data.token);
+      setProfile(data.profile);
       window.location.href = 'dashboard.html';
     } catch (err) {
       errorDiv.textContent = 'Server error.';
@@ -51,16 +60,77 @@ function setupLogout() {
   }
 }
 
-// Dashboard protection
+// Dashboard protection and SIEM events
 if (window.location.pathname.endsWith('dashboard.html')) {
   if (!getToken()) {
     window.location.href = 'index.html';
   }
   setupLogout();
-  // (Optional: fetch real data here)
+  const profile = getProfile();
+  if (!profile) {
+    clearToken();
+    window.location.href = 'index.html';
+  }
+  // Fetch and display events
+  async function loadEvents(clientFilter) {
+    const res = await fetch('https://siem-dashboard.onrender.com/events', {
+      headers: { ...authHeader() }
+    });
+    if (!res.ok) return;
+    let events = await res.json();
+    // If admin and filter is set, filter events
+    if (profile.role === 'admin' && clientFilter) {
+      events = events.filter(e => e.clientId === clientFilter);
+    }
+    renderEvents(events);
+    if (profile.role === 'admin') {
+      renderClientDropdown(events, clientFilter);
+    }
+  }
+  // Render events table
+  function renderEvents(events) {
+    let html = `<h3>SIEM Events</h3><table class="events-table"><thead><tr><th>Client</th><th>Type</th><th>Message</th><th>Timestamp</th></tr></thead><tbody>`;
+    if (events.length === 0) {
+      html += '<tr><td colspan="4">No events</td></tr>';
+    } else {
+      for (const e of events) {
+        html += `<tr><td>${e.clientId}</td><td>${e.type}</td><td>${e.message}</td><td>${new Date(e.timestamp).toLocaleString()}</td></tr>`;
+      }
+    }
+    html += '</tbody></table>';
+    let container = document.getElementById('events-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'events-container';
+      document.querySelector('.dashboard-main').appendChild(container);
+    }
+    container.innerHTML = html;
+  }
+  // Render client dropdown for admin
+  function renderClientDropdown(events, selected) {
+    const uniqueClients = [...new Set(events.map(e => e.clientId))];
+    let dropdown = document.getElementById('client-filter');
+    if (!dropdown) {
+      dropdown = document.createElement('select');
+      dropdown.id = 'client-filter';
+      dropdown.style.margin = '1rem 0';
+      document.querySelector('.dashboard-main').insertBefore(dropdown, document.getElementById('events-container'));
+      dropdown.addEventListener('change', function() {
+        localStorage.setItem('siem_client_filter', dropdown.value);
+        loadEvents(dropdown.value);
+      });
+    }
+    dropdown.innerHTML = '<option value="">All Clients</option>' + uniqueClients.map(c => `<option value="${c}"${selected===c?' selected':''}>${c}</option>`).join('');
+  }
+  // Load with persisted filter for admin
+  let clientFilter = '';
+  if (profile.role === 'admin') {
+    clientFilter = localStorage.getItem('siem_client_filter') || '';
+  }
+  loadEvents(clientFilter);
 }
 
-// Users page logic
+// Users page logic (unchanged)
 if (window.location.pathname.endsWith('users.html')) {
   if (!getToken()) {
     window.location.href = 'index.html';
@@ -104,7 +174,7 @@ if (window.location.pathname.endsWith('users.html')) {
     const name = document.getElementById('new-name').value;
     const role = document.getElementById('new-role').value;
     try {
-      const res = await fetch('https://siem-dashboard.onrender.com/users', {
+      const res = await fetch('https://siem-dashboard.onrender.com/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...authHeader() },
         body: JSON.stringify({ username, password, profile: { name, role } })
