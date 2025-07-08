@@ -22,7 +22,7 @@ if (document.getElementById('login-form')) {
     const errorDiv = document.getElementById('login-error');
     errorDiv.textContent = '';
     try {
-      const res = await fetch('http://localhost:3001/login', {
+      const res = await fetch('https://siem-dashboard.onrender.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -74,7 +74,7 @@ if (window.location.pathname.endsWith('users.html')) {
   async function loadUsers() {
     usersTable.innerHTML = '';
     try {
-      const res = await fetch('http://localhost:3001/users', {
+      const res = await fetch('https://siem-dashboard.onrender.com/users', {
         headers: { ...authHeader() }
       });
       if (!res.ok) throw new Error('Failed to fetch users');
@@ -104,7 +104,7 @@ if (window.location.pathname.endsWith('users.html')) {
     const name = document.getElementById('new-name').value;
     const role = document.getElementById('new-role').value;
     try {
-      const res = await fetch('http://localhost:3001/register', {
+      const res = await fetch('https://siem-dashboard.onrender.com/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...authHeader() },
         body: JSON.stringify({ username, password, profile: { name, role } })
@@ -128,7 +128,7 @@ if (window.location.pathname.endsWith('users.html')) {
       const nameInput = usersTable.querySelector(`input[data-username='${username}'][data-field='name']`);
       const roleInput = usersTable.querySelector(`input[data-username='${username}'][data-field='role']`);
       try {
-        const res = await fetch(`http://localhost:3001/users/${username}`, {
+        const res = await fetch(`https://siem-dashboard.onrender.com/users/${username}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', ...authHeader() },
           body: JSON.stringify({ profile: { name: nameInput.value, role: roleInput.value } })
