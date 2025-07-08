@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 const USERS_FILE = path.join(__dirname, 'users.json');
 const JWT_SECRET = 'supersecretkey';
 
-app.use(cors({ origin: 'https://your-siem-frontend.netlify.app', credentials: true }));
+app.use(cors({ origin: 'https://tubular-basbousa-596670.netlify.app', credentials: true }));
 app.use(bodyParser.json());
 
 // Helper: Load users
