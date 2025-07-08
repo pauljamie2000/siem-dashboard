@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIEM Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-bg">
+  <nav class="navbar">
+    <span class="nav-title">SIEM Dashboard</span>
+    <a href="users.html">Users</a>
+    <button id="logout-btn">Logout</button>
+  </nav>
+  <main class="dashboard-main">
+    <h2>Network Security Overview</h2>
+    <div class="dashboard-cards">
+      <div class="card">Vulnerability Scans<br><span class="card-value" id="vuln-status">All Clear</span></div>
+      <div class="card">Breach Alerts<br><span class="card-value" id="breach-status">No Breaches</span></div>
+      <div class="card">Device Security<br><span class="card-value" id="device-status">Secured</span></div>
+      <div class="card">Staff Training<br><span class="card-value" id="training-status">Up to Date</span></div>
+      <div class="card">Incident Plans<br><span class="card-value" id="incident-status">Ready</span></div>
+      <div class="card">Password/2FA/Backups<br><span class="card-value" id="password-status">Enabled</span></div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html> 

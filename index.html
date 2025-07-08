@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Security for Small Businesses</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Protect Your Small Business from Cyber Threats</h1>
+    <p class="subtitle">Affordable, expert cybersecurity services for peace of mind</p>
+  </header>
+  <main>
+    <section class="services">
+      <h2>Our Services</h2>
+      <ul id="services-list">
+        <li>Run vulnerability scans on your network & websites</li>
+        <li>Check for exposed passwords & breaches</li>
+        <li>Secure routers, WiFi, and essential devices (POS, security cams, printers)</li>
+        <li>Staff training on phishing & social engineering (quick 20 min sessions)</li>
+        <li>Create incident response plans (know what to do if hacked)</li>
+        <li>Set up password managers, 2FA, and backups</li>
+      </ul>
+    </section>
+    <section class="why-choose-us">
+      <h2>Why Choose Us?</h2>
+      <div class="highlights">
+        <div class="highlight">
+          <span class="icon"><!-- lock icon --></span>
+          <h3>Expertise</h3>
+          <p>Years of experience protecting small businesses from real threats.</p>
+        </div>
+        <div class="highlight">
+          <span class="icon"><!-- lightbulb icon --></span>
+          <h3>Education</h3>
+          <p>We empower your staff with practical, easy-to-understand training.</p>
+        </div>
+        <div class="highlight">
+          <span class="icon"><!-- flash icon --></span>
+          <h3>Fast Response</h3>
+          <p>Quick support and clear incident plans if something goes wrong.</p>
+        </div>
+      </div>
+    </section>
+    <section class="pricing">
+      <h2>Pricing</h2>
+      <div class="pricing-options">
+        <div class="option" id="monthly-option">
+          <h3>Monthly Subscription</h3>
+          <p>Ongoing protection, monitoring, and support</p>
+          <p class="price">$99/month</p>
+          <button type="button" class="learn-more-btn" data-target="monthly-details">Learn More</button>
+          <div class="plan-details" id="monthly-details">
+            <ul>
+              <li>Monthly vulnerability scans</li>
+              <li>Continuous breach monitoring</li>
+              <li>Quarterly staff training sessions</li>
+              <li>24/7 support for incidents</li>
+              <li>Setup and maintenance of password managers, 2FA, and backups</li>
+              <li>Custom incident response plan</li>
+              <li>Discounted on-site visits</li>
+            </ul>
+          </div>
+        </div>
+        <div class="option" id="audit-option">
+          <h3>One-Time Audit</h3>
+          <p>Comprehensive security checkup & recommendations</p>
+          <p class="price">$399</p>
+          <button type="button" class="learn-more-btn" data-target="audit-details">Learn More</button>
+          <div class="plan-details" id="audit-details">
+            <ul>
+              <li>Full network & website vulnerability scan</li>
+              <li>Check for exposed passwords & breaches</li>
+              <li>Device & WiFi security review</li>
+              <li>Staff phishing/social engineering training (1 session)</li>
+              <li>Incident response plan template</li>
+              <li>Setup recommendations for password managers, 2FA, and backups</li>
+              <li>Detailed written report</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Features</th>
+              <th>Monthly Subscription</th>
+              <th>One-Time Audit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Vulnerability Scans</td><td>Monthly</td><td>Once</td></tr>
+            <tr><td>Breach Monitoring</td><td>Continuous</td><td>One-time check</td></tr>
+            <tr><td>Staff Training</td><td>Quarterly</td><td>1 session</td></tr>
+            <tr><td>Incident Response Plan</td><td>Custom & maintained</td><td>Template provided</td></tr>
+            <tr><td>Support</td><td>24/7</td><td>Report & recommendations</td></tr>
+            <tr><td>Password Manager/2FA Setup</td><td>Setup & maintenance</td><td>Setup recommendations</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <button class="faq-question">How does the monthly subscription work?</button>
+        <div class="faq-answer">
+          <p>We provide ongoing monitoring, regular scans, and support. You’ll get monthly reports and can contact us anytime for help or questions.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What if I only want a one-time checkup?</button>
+        <div class="faq-answer">
+          <p>Our one-time audit gives you a full security review and actionable recommendations. No ongoing commitment required.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is staff training included?</button>
+        <div class="faq-answer">
+          <p>Yes! Both plans include staff training. The monthly plan includes quarterly sessions, while the audit includes one session.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can you help if we get hacked?</button>
+        <div class="faq-answer">
+          <p>Absolutely. Our monthly subscribers get 24/7 incident support. Audit clients receive a response plan and can request additional help if needed.</p>
+        </div>
+      </div>
+    </section>
+    <section class="contact">
+      <h2>Contact Us</h2>
+      <form id="contact-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <p class="contact-alt">Or email us at <a href="mailto:info@cybersecurebiz.com">info@cybersecurebiz.com</a></p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 Cyber Security for Small Businesses. All rights reserved.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html> 
